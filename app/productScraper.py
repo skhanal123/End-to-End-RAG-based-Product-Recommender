@@ -47,7 +47,7 @@ def fetch_asin(search_query):
     """
     session = HTMLSession()
     r = session.get(
-        f"http://api.scraperapi.com?api_key=a6f7513dc2679575002f461b394f15c9&url=https://www.amazon.ca/s?k={search_query}"
+        f"http://api.scraperapi.com?api_key={settings.scraper_api_token}=https://www.amazon.ca/s?k={search_query}"
     )
 
     products = r.html.find("div[data-asin]")
