@@ -1,3 +1,3 @@
 ## Architecture
 
-![Alt text](ProductRecommender.png?raw=true "Title")
+![Alt text](ProductRecommender.jpg?raw=true "Title")
