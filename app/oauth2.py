@@ -54,6 +54,4 @@ def get_current_user(
 
     user = db.query(models.User).filter(models.User.id == token.id).first()
 
-    # print(user.email)
-
     return user

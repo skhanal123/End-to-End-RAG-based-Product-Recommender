@@ -49,8 +49,10 @@ def chat_engine(index, user_profile, user_name):
 
 @router.post("/chat", response_model=schemas.ChatResponse)
 async def product_recommender(
-    query: schemas.ChatQuery, current_user: int = Depends(oauth2.get_current_user)
+    query: schemas.ChatQuery = Depends(schemas.ChatQuery),
+    current_user: int = Depends(oauth2.get_current_user),
 ):
+
     user_query = query.model_dump()
 
     ## Block 1: Uncomment the below block to use the vector index from in-memory - starts
@@ -66,6 +68,8 @@ async def product_recommender(
 
     user_name = current_user.user_name
     profile = fetch_userProfile(user_name)
+    print(profile)
+
     chat_agent = chat_engine(index, profile, user_name)
     if user_query["query"] == "reset":
 
@@ -74,7 +78,7 @@ async def product_recommender(
 
         # Send conversation for analysis and update user profile if anything new is discovered
         chat_analysis = openai_chatAnalyzer(conversation_hist)
-        print(chat_analysis)
+
         update_userProfile(user_name, chat_analysis)
 
         # Reset the chat engine
